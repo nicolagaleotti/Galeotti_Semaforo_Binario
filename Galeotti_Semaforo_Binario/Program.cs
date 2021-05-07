@@ -10,6 +10,7 @@ namespace Galeotti_Semaforo_Binario
     class Program
     {
         static int n = 0;
+        static SemaphoreSlim s = new SemaphoreSlim(1);
 
         static void Main(string[] args)
         {
@@ -36,7 +37,9 @@ namespace Galeotti_Semaforo_Binario
         {
             for (int i = 0; i <= 1000000; i++)
             {
+                s.Wait();
                 n++;
+                s.Release();
             }
         }
 
@@ -44,7 +47,9 @@ namespace Galeotti_Semaforo_Binario
         {
             for (int i = 0; i <= 1000000; i++)
             {
+                s.Wait();
                 n--;
+                s.Release();
             }
         }
     }
